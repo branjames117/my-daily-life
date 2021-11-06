@@ -9,8 +9,14 @@ textarea {
   border: none;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
-  padding: 10px;
+  border-left: 10px solid black;
+  padding: 7px;
+}
+
+.hour-row p {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .jumbotron {
