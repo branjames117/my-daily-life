@@ -95,11 +95,13 @@ $(function () {
 
   // audit hours, update colors accordingly
   function auditHours() {
+    // update day in case the day changes
+    currentDayEl.text('Today is ' + moment().format('dddd, MMM Do, YYYY'));
+    // grab the new current hour
     currentHour = moment().format('H');
-    console.log(currentHour);
+    // for each row, compare hour to current and adjust style accordingly
     $('.hour-row').each(function () {
       let index = $(this).attr('id').replace('hour', '') - 9;
-      console.log(index);
       $(this).addClass(
         hours[index].mil == currentHour
           ? 'future'
@@ -110,6 +112,6 @@ $(function () {
     });
   }
 
-  // refresh the time blocks every 5 minutes
+  // refresh the time blocks every 5 minutes by calling auditHours()
   setInterval(auditHours, 1000 * 60 * 5);
 });
