@@ -1,13 +1,19 @@
 $(function () {
   // display the current day and date in the hero
   const currentDayEl = $('#currentDay');
-  currentDayEl.text('Today is ' + moment().format('dddd, MMM Do, YYYY'));
+  currentDayEl.text(moment().format('dddd, MMM Do, YYYY'));
+  // display the current time in the hero and update it every second
+  const currentTimeEl = $('#currentTime');
+  currentTimeEl.text(moment().format('h:mm:ss a'));
+  setInterval(() => {
+    currentTimeEl.text(moment().format('h:mm:ss a'));
+  }, 1000);
 
   // get the current hour as of page load
   let currentHour = moment().format('H');
 
   // default array of time rows with no user input
-  let defaultHoursArr = [
+  const defaultHoursArr = [
     { label: '9AM', mil: 9, data: '' },
     { label: '10AM', mil: 10, data: '' },
     { label: '11AM', mil: 11, data: '' },
