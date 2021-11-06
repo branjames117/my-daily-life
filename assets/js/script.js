@@ -44,32 +44,32 @@ $(function () {
       // is the hour yet to pass, if so, give bg-success
       .addClass(
         hours[i].mil == currentHour
-          ? 'bg-success'
+          ? 'future'
           : hours[i].mil < currentHour
-          ? 'bg-secondary'
-          : 'bg-danger'
+          ? 'past'
+          : 'present'
       )
       .attr('id', 'hour' + hours[i].mil);
     const entryRowPEl = $('<p>').text(hours[i].data);
     entryRowEl.append(entryRowPEl);
 
-    // create the right-column which displays the edit btn
-    const editRowEl = $('<div>')
+    // create the right-column which displays the save btn
+    const saveRowEl = $('<div>')
       .addClass(
-        'col-1 p-3 border rounded-right bg-info d-flex align-items-center justify-content-center hour-edit'
+        'col-1 p-3 border rounded-right bg-info d-flex align-items-center justify-content-center hour-save'
       )
-      .attr('id', 'edit' + hours[i].mil);
-    const editButtonEl = $('<i>').addClass('fas fa-edit');
-    editRowEl.append(editButtonEl);
+      .attr('id', 'save' + hours[i].mil);
+    const saveButtonEl = $('<i>').addClass('fas fa-save');
+    saveRowEl.append(saveButtonEl);
 
     // add it all together
-    hourRowEl.append(timeRowEl, entryRowEl, editRowEl);
+    hourRowEl.append(timeRowEl, entryRowEl, saveRowEl);
 
     // throw the finished row onto the container
     $('.container').append(hourRowEl);
   }
 
-  // update local storage any time the user enters new data
+  // update local storage any time the user saves new data
   function saveHours() {
     localStorage.setItem('hours', JSON.stringify(hours));
   }
@@ -87,15 +87,10 @@ $(function () {
     let newData = $(this).val().trim();
     let dataIndex = $(this).parent().attr('id').replace('hour', '') - 9;
     hours[dataIndex].data = newData;
-    saveHours();
     let newEntryRowPEl = $('<p>').text(newData);
     $(this).replaceWith(newEntryRowPEl);
   });
 
   // click listener for edit buttons
-  $('.hour-edit').on('click', function () {
-    // get ID to figure out which text field to edit
-    let hourToEdit = $(this).attr('id').replace('edit', '');
-    $('#hour' + hourToEdit + ' p').click();
-  });
+  $('.hour-save').on('click', saveHours);
 });
