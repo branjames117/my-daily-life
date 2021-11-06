@@ -4,8 +4,7 @@ $(function () {
   currentDayEl.text('Today is ' + moment().format('dddd, MMM Do, YYYY'));
 
   // get the current hour as of page load
-  // let currentHour = moment().format('H');
-  let currentHour = 12;
+  let currentHour = moment().format('H');
 
   // default array of time rows with no user input
   let defaultHoursArr = [
@@ -93,4 +92,24 @@ $(function () {
 
   // click listener for edit buttons
   $('.hour-save').on('click', saveHours);
+
+  // audit hours, update colors accordingly
+  function auditHours() {
+    currentHour = moment().format('H');
+    console.log(currentHour);
+    $('.hour-row').each(function () {
+      let index = $(this).attr('id').replace('hour', '') - 9;
+      console.log(index);
+      $(this).addClass(
+        hours[index].mil == currentHour
+          ? 'future'
+          : hours[index].mil < currentHour
+          ? 'past'
+          : 'present'
+      );
+    });
+  }
+
+  // refresh the time blocks every 5 minutes
+  setInterval(auditHours, 1000 * 60 * 5);
 });

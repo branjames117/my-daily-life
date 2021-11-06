@@ -7,7 +7,10 @@ This is a daily planner app built for Week 5 of the Vanderbilt Coding Boot Camp,
 - When app is opened, the current day is displayed at the top of the calendar.
 - When scrolled down, time blocks for standard business hours appear.
 - Each time block is color-coded to indicate a past hour, the current hour, or a coming hour.
-- When a time block is clicked, an event can be entered, which is saved in local storage for persistence.
+- When a time block is clicked, an event can be entered.
+- When a save button is clicked, the entire schedule is saved to local storage.
+- When the app is revisited, the previously-saved schedule is reloaded.
+- Every 5 minutes the app runs a check against the current hour and updates the color-coding.
 
 ## Table of Contents
 
