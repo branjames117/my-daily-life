@@ -27,9 +27,10 @@ $(function () {
 
   // get hours from local storage if exists, else create it
   let hours = [];
-  hours = localStorage.hours
-    ? (hours = JSON.parse(localStorage.hours))
-    : localStorage.setItem('hours', JSON.stringify(defaultHoursArr));
+  if (!localStorage.hours) {
+    localStorage.setItem('hours', JSON.stringify(defaultHoursArr));
+  }
+  hours = JSON.parse(localStorage.hours);
 
   // for each hour in the standard work day, create a row, using data from the hours array pulled from localstorage
   for (let i = 0; i < hours.length; i++) {
