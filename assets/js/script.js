@@ -111,10 +111,10 @@ $(function () {
       let index = $(this).attr('id').replace('hour', '') - 9;
       $(this).addClass(
         hours[index].mil == currentHour
-          ? 'future'
+          ? 'present'
           : hours[index].mil < currentHour
           ? 'past'
-          : 'present'
+          : 'future'
       );
     });
   }
