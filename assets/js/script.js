@@ -101,7 +101,6 @@ $(function () {
   $('.hour-save').on('click', saveHours);
 
   // display random quote on page
-  console.log(Math.floor(Math.random() * 6));
   $('#quote')
     .text(
       [
@@ -123,11 +122,11 @@ $(function () {
     currentHour = moment().format('H');
     // for each row, compare hour to current and adjust style accordingly
     $('.hour-row').each(function () {
-      let index = $(this).attr('id').replace('hour', '') - 9;
+      let hourOfRow = $(this).attr('id').replace('hour', '') - 0;
       $(this).addClass(
-        hours[index].mil == currentHour
+        hourOfRow == currentHour
           ? 'present'
-          : hours[index].mil < currentHour
+          : hourOfRow < currentHour
           ? 'past'
           : 'future'
       );
@@ -135,5 +134,5 @@ $(function () {
   }
 
   // refresh the time blocks every 5 minutes by calling auditHours()
-  setInterval(auditHours, 1000 * 60 * 5);
+  setInterval(auditHours, 1000);
 });
