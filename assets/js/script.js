@@ -117,7 +117,7 @@ $(function () {
   // audit hours, update colors accordingly
   function auditHours() {
     // update day in case the day changes
-    currentDayEl.text('Today is ' + moment().format('dddd, MMM Do, YYYY'));
+    currentDayEl.text(moment().format('dddd, MMM Do, YYYY'));
     // grab the new current hour
     currentHour = moment().format('H');
     // for each row, compare hour to current and adjust style accordingly
