@@ -50,10 +50,10 @@ $(function () {
       // is the hour yet to pass, if so, give bg-success
       .addClass(
         hours[i].mil == currentHour
-          ? 'future'
+          ? 'present'
           : hours[i].mil < currentHour
           ? 'past'
-          : 'present'
+          : 'future'
       )
       .attr('id', 'hour' + hours[i].mil);
     const entryRowPEl = $('<p>').text(hours[i].data);
