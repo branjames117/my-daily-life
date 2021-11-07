@@ -88,7 +88,7 @@ $(function () {
     dataInput.trigger('focus');
   });
 
-  // blur listener, to save user inputted data to local storage
+  // blur listener
   $('.hour-row').on('blur', 'textarea', function () {
     let newData = $(this).val().trim();
     let dataIndex = $(this).parent().attr('id').replace('hour', '') - 9;
@@ -97,8 +97,23 @@ $(function () {
     $(this).replaceWith(newEntryRowPEl);
   });
 
-  // click listener for edit buttons
+  // click listener for save buttons
   $('.hour-save').on('click', saveHours);
+
+  // display random quote on page
+  console.log(Math.floor(Math.random() * 6));
+  $('#quote')
+    .text(
+      [
+        '"Procrastination is the foundation of all disasters." - Pandora Poikilos',
+        '"You can\'t make up for lost time. You can only do better in the future." - Ashley Ormon',
+        '"One always has time enough, if one will apply it well." - Johann Wolfgang von Goethe',
+        '"The secret of success in life is time rightly used." - Sivananda Saraswati',
+        '"All we have to decide is what to do with the time that is given us." - Gandalf the Grey',
+        '"Time flies like an arrow; fruit flies like a banana." - Anthony G. Oettinger',
+      ][Math.floor(Math.random() * 6)]
+    )
+    .addClass('container text-center py-5');
 
   // audit hours, update colors accordingly
   function auditHours() {
