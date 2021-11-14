@@ -78,8 +78,9 @@ $(function () {
   // update local storage any time the user saves new data
   function saveHours(e) {
     const hour = e.currentTarget.id.replace('save', '');
-    const value = document.querySelector('#hour' + hour + ' p').textContent;
     const index = hour - 9;
+    const value = $('#hour' + hour + ' p').text();
+    // update specific item in array with new textarea value
     hours[index].data = value;
     localStorage.setItem('hours', JSON.stringify(hours));
   }
