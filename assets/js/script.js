@@ -76,7 +76,11 @@ $(function () {
   }
 
   // update local storage any time the user saves new data
-  function saveHours() {
+  function saveHours(e) {
+    const hour = e.currentTarget.id.replace('save', '');
+    const value = document.querySelector('#hour' + hour + ' p').textContent;
+    const index = hour - 9;
+    hours[index].data = value;
     localStorage.setItem('hours', JSON.stringify(hours));
   }
 
@@ -91,8 +95,6 @@ $(function () {
   // blur listener
   $('.hour-row').on('blur', 'textarea', function () {
     let newData = $(this).val().trim();
-    let dataIndex = $(this).parent().attr('id').replace('hour', '') - 9;
-    hours[dataIndex].data = newData;
     let newEntryRowPEl = $('<p>').text(newData);
     $(this).replaceWith(newEntryRowPEl);
   });
@@ -120,19 +122,21 @@ $(function () {
     currentDayEl.text(moment().format('dddd, MMM Do, YYYY'));
     // grab the new current hour
     currentHour = moment().format('H');
-    // for each row, compare hour to current and adjust style accordingly
+    // for each row, compare hour to current and adjust class list accordingly
     $('.hour-row').each(function () {
       let hourOfRow = $(this).attr('id').replace('hour', '') - 0;
-      $(this).addClass(
-        hourOfRow == currentHour
-          ? 'present'
-          : hourOfRow < currentHour
-          ? 'past'
-          : 'future'
+      $(this).attr(
+        'class',
+        'col-7 col-md-8 p-3 border hour-row ' +
+          (hourOfRow == currentHour
+            ? 'present'
+            : hourOfRow < currentHour
+            ? 'past'
+            : 'future')
       );
     });
   }
 
-  // refresh the time blocks every 5 minutes by calling auditHours()
-  setInterval(auditHours, 1000);
+  // refresh the time block colors by calling auditHours() every minute
+  setInterval(auditHours, 1000 * 60);
 });
